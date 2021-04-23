@@ -1,24 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+kind: ReplicationController
+apiVersion: v1
 metadata:
-  name: nginx-deployment-v1
+  name: green
   labels:
-    app: nginx
+    app: green
 spec:
-  replicas: 2
+  replicas: 1
   selector:
-    matchLabels:
-      app: nginx
-      version: v1
+    app: green
   template:
     metadata:
       labels:
-        app: nginx
-        version: v1
+        app: green
     spec:
       containers:
-        - name: nginx
-          image: webapp:v1
-          imagePullPolicy: Never
+        - name: green
+          image: andresaaap/testgreenimage
           ports:
-            - containerPort: 80
+            - name: http-server
+              containerPort: 80
